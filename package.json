@@ -1,0 +1,40 @@
+{
+    "name": "mapa-signala",
+    "version": "0.0.1",
+    "description": "Serversko pokriće za aplikaciju Mapa Signala za mt:s app konkurs 2017/2018",
+    "keywords": [
+        "mt:s",
+        "android",
+        "express",
+        "server"
+    ],
+    "license": "GPL-3.0",
+    "author": {
+        "name": "KockaAdmiralac",
+        "email": "1405223@gmail.com",
+        "url": "https://github.com/KockaAdmiralac"
+    },
+    "contributors": [
+        {
+            "name": "lazar2222",
+            "url": "https://github.com/lazar2222"
+        }
+    ],
+    "main": "main.js",
+    "scripts": {
+        "start": "node main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/NevermoreStudios/mapa-signala.git"
+    },
+    "dependencies": {
+        "express": ">=4.0",
+        "body-parser": ">=1.18.2",
+        "mysql": ">=2.15.0"
+    },
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "private": true
+}

@@ -1,0 +1,8 @@
+{
+    "port": 8080,
+    "host": "localhost",
+    "database": "mapa_signala",
+    "username": "mapa_signala",
+    "password": "password",
+    "limit": 100
+}
