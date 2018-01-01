@@ -1,6 +1,6 @@
 {
 	"bitwise"		: true,
-	"camelcase"		: false, // Dammit NPM :(
+	"camelcase"		: true,
 	"curly"			: true,
 	"eqeqeq"		: true,
 	"esversion"		: 6,
@@ -28,7 +28,6 @@
 	"nonew"			: true,
 	"notypeof"		: true,
 	"predef"		: [
-        "main"
 	],
 	"quotmark"		: "single",
 	"shadow"		: "outer",
