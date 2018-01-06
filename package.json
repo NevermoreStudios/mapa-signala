@@ -1,6 +1,6 @@
 {
     "name": "mapa-signala",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Serversko pokriće za aplikaciju Mapa Signala za mt:s app konkurs 2017/2018",
     "keywords": [
         "mt:s",
