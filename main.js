@@ -145,7 +145,7 @@ app.get('/get/:latitude/:longitude/:provider', function(request, response) {
                     if (!res[prov][type]) {
                         res[prov][type] = [];
                     }
-                } else if (prov === provider) {
+                } else if (prov + 1 === provider) {
                     if (!res[type]) {
                         res[type] = [];
                     }
@@ -153,7 +153,7 @@ app.get('/get/:latitude/:longitude/:provider', function(request, response) {
                     return;
                 }
                 const diffLat = latitude - el.latitude,
-                        diffLong = longitude - el.longitude;
+                      diffLong = longitude - el.longitude;
                 // Reduce square to circle
                 if (
                     diffLat * diffLat +
@@ -232,7 +232,6 @@ app.post('/post', function(request, response) {
                       dbm = Math.round(Number(el.dbm)),
                       type = Math.round(Number(el.type)),
                       provider = getProvider(el.provider);
-                console.log(latitude, longitude, dbm, type, provider);
                 if (
                     !isNaN(latitude) && !isNaN(longitude) && !isNaN(dbm) &&
                     !isNaN(type) && provider > 0 && type >= 0 && type < 4 &&
