@@ -99,7 +99,7 @@ function getProvider(provider) {
         return -1;
     } else {
         provider = Math.round(Number(provider));
-        if (isNaN(provider) || provider < 22001 || provider > 22003) {
+        if (isNaN(provider) || provider < 22001 || provider > 22005) {
             return 0;
         } else {
             return provider - 22000;
