@@ -88,10 +88,19 @@ function executeDB(response, query, callback) {
     }
 }
 
-function average(arr) {
-    let sum = 0;
-    arr.forEach(s => sum += s);
-    return sum / arr.length;
+function operations(arr) {
+    let sum = 0, max = Number.MIN_SAFE_INTEGER, min = Number.MAX_SAFE_INTEGER;
+    arr.forEach(function(s) {
+        sum += s;
+        if (s > max) {
+            max = s;
+        }
+        if (s < min) {
+            min = s;
+        }
+    });
+    const avg = sum / arr.length;
+    return { min, max, avg};
 }
 
 function getProvider(provider) {
@@ -104,6 +113,26 @@ function getProvider(provider) {
         } else {
             return provider - 22000;
         }
+    }
+}
+
+function typeToGen(type) {
+    switch (type) {
+        case 16: // GSM (2G)
+        case 1:  // GPRS (2.5G)
+        case 2:  // EDGE (2.5G)
+            return 2;
+        case 3:  // UMTS (3G)
+        case 17: // TD_SCDMA (3G)
+        case 8:  // HSDPA (3.5G)
+        case 9:  // HSUPA (3.5G)
+        case 10: // HSPA (3.5G)
+        case 15: // HSPAP (3.5G)
+            return 3;
+        case 13: // LTE (4G)
+            return 4;
+        default: // Unknown/Unsupported in Serbia
+            return 1;
     }
 }
 
@@ -136,7 +165,7 @@ app.get('/get/:latitude/:longitude/:provider', function(request, response) {
         executeDB(response, query, function(result) {
             const res = [];
             result.forEach(function(el) {
-                const type = el.type - 1,
+                const type = typeToGen(el.type) - 1,
                       prov = el.provider - 1;
                 if (provider === -1) {
                     if (!res[prov]) {
@@ -170,9 +199,9 @@ app.get('/get/:latitude/:longitude/:provider', function(request, response) {
             response.json(res.map(function(el) {
                 if (el) {
                     if (provider === -1) {
-                        return el.map(e2 => average(e2));
+                        return el.map(e2 => operations(e2));
                     } else {
-                        return average(el);
+                        return operations(el);
                     }
                 }
                 return -1;
@@ -234,7 +263,7 @@ app.post('/post', function(request, response) {
                       provider = getProvider(el.provider);
                 if (
                     !isNaN(latitude) && !isNaN(longitude) && !isNaN(dbm) &&
-                    !isNaN(type) && provider > 0 && type >= 0 && type < 4 &&
+                    !isNaN(type) && provider > 0 && type >= 0 &&
                     latitude >= 0 && longitude >= 0
                 ) {
                     arr.push(`(${[
