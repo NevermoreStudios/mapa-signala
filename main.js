@@ -222,15 +222,15 @@ app.get('/tile/:zoom/:x/:y/:gen/:provider', function(request, response) {
           provider = getProvider(params.provider);
     if (
         isNaN(zoom) || isNaN(x) || isNaN(y) ||
-        !provider || isNaN(gen) ||
-        zoom > 19 || zoom < 0 ||
-        x > 65536 || x < 0 ||
-        y > 65536 || y < 0
+        provider < 1 || isNaN(gen) ||
+        zoom > 17 || zoom < 12 ||
+        x > 72991 || x < 72960 ||
+        y > 47263 || y < 47232
     ) {
         error(
             response,
             'parameters',
-            '`zoom`, `x` and `y` parameters must be supplied and valid!'
+            'Parameters must be supplied and valid!'
         );
     } else {
         response.sendFile(`${zoom}-${x}-${y}-${gen}-${provider}.png`, {

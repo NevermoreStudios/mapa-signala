@@ -1,4 +1,7 @@
 node_modules
 config.json
 tiles/*.png
+tiles/*.exe
+tiles/*.dll
+tiles/*.xml
 keys/*.pem
