@@ -220,12 +220,16 @@ app.get('/tile/:zoom/:x/:y/:gen/:provider', function(request, response) {
           y = Math.round(Number(params.y)),
           gen = Math.round(Number(params.gen)),
           provider = getProvider(params.provider);
+    let pow;
+    if (!isNaN(zoom)) {
+        pow = Math.pow(2, zoom - 12);
+    }
     if (
         isNaN(zoom) || isNaN(x) || isNaN(y) ||
         provider < 1 || isNaN(gen) ||
         zoom > 17 || zoom < 12 ||
-        x > 72991 || x < 72960 ||
-        y > 47263 || y < 47232
+        x >= 2281 * pow || x < 2280 * pow ||
+        y >= 1477 * pow || y < 1476 * pow
     ) {
         error(
             response,
