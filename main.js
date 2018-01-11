@@ -82,6 +82,7 @@ function executeDB(response, query, callback) {
                     } else {
                         callback(result);
                     }
+                    connection.release();
                 });
             }
         });
@@ -99,8 +100,14 @@ function operations(arr) {
             min = s;
         }
     });
+    if (min === Number.MAX_SAFE_INTEGER) {
+        min = 1;
+    }
+    if (max === Number.MIN_SAFE_INTEGER) {
+        max = 1;
+    }
     const avg = sum / arr.length;
-    return { min, max, avg};
+    return { min, max, avg };
 }
 
 function getProvider(provider) {
